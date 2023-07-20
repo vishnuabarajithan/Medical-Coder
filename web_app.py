@@ -1,12 +1,12 @@
 import streamlit as st
 import os
-from PyPDF2 import PdfReader
 from PIL import Image
 from pdf2image import convert_from_path
 import io
 from fpdf import FPDF
 import base64
 import openai
+from PyPDF2 import PdfReader
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
