@@ -1,10 +1,11 @@
 streamlit==1.24.1
 openai==0.27.8
+pdfplumber
 tiktoken
-python-dotenv
-PyPDF2
-textract
 pytesseract
 pdf2image
 Pillow
+numpy
 fpdf
+PyPDF2
+
