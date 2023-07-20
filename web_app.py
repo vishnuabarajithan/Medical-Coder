@@ -1,6 +1,5 @@
 import streamlit as st
 import os
-import openai
 from PyPDF2 import PdfReader
 from PIL import Image
 import pytesseract
@@ -8,6 +7,7 @@ from pdf2image import convert_from_path
 import io
 from fpdf import FPDF
 import base64
+import openai
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
