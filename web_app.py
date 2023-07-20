@@ -2,7 +2,6 @@ import streamlit as st
 import os
 from PyPDF2 import PdfReader
 from PIL import Image
-import pytesseract
 from pdf2image import convert_from_path
 import io
 from fpdf import FPDF
@@ -12,7 +11,7 @@ import openai
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
 
-def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0, max_tokens=500):
+def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0, max_tokens=1000):
     response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
@@ -22,17 +21,11 @@ def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0,
     return response.choices[0].message["content"]
 
 def read_pdf(file, is_image_pdf):
-    if is_image_pdf:  # Image PDF
-        images = convert_from_path(file.name)
-        text = ""
-        for i in range(len(images)):
-            text += pytesseract.image_to_string(images[i])
-    else:  # Text PDF
-        pdfReader = PdfReader(file)
-        text = ""
-        for page in range(len(pdfReader.pages)):
-            text += pdfReader.pages[page].extract_text()
-    return text
+	pdfReader = PdfReader(file)
+	text = ""
+	for page in range(len(pdfReader.pages)):
+		text += pdfReader.pages[page].extract_text()
+	return text
 
 def read_image(file):
     image = Image.open(file)
