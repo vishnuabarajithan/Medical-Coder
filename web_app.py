@@ -3,10 +3,10 @@ import os
 from PIL import Image
 import io
 import base64
-import openai
-from PyPDF2 import PdfReader
 from reportlab.lib.pagesizes import letter
 from reportlab.pdfgen import canvas
+import openai
+from PyPDF2 import PdfReader
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
