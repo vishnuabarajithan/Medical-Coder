@@ -2,7 +2,6 @@ import streamlit as st
 import os
 from PIL import Image
 import io
-from fpdf import FPDF
 import base64
 import openai
 from PyPDF2 import PdfReader
