@@ -6,11 +6,13 @@ from fpdf import FPDF
 import base64
 import openai
 from PyPDF2 import PdfReader
+from reportlab.lib.pagesizes import letter
+from reportlab.pdfgen import canvas
 
 openai.api_key = os.getenv('OPENAI_API_KEY')
 
 
-def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=0, max_tokens=1000):
+def get_completion_from_messages(messages, model="gpt-3.5-turbo", temperature=1, max_tokens=1000):
     response = openai.ChatCompletion.create(
         model=model,
         messages=messages,
@@ -32,17 +34,15 @@ def read_image(file):
     return text
 
 def get_pdf_file(text):
-    pdf = FPDF()
-    pdf.add_page()
-    pdf.set_font("Arial", size = 12) 
-    pdf.set_auto_page_break(auto = True, margin = 15)
-    for i in text.split('\n'):
-        pdf.multi_cell(0, 10, txt = i, align = 'L')
-    pdf_content = pdf.output(dest='S').encode("latin1")
-    pdf_output = io.BytesIO(pdf_content)
+    pdf_output = io.BytesIO()
+    c = canvas.Canvas(pdf_output, pagesize=letter)
+    y = 750
+    for line in text.split('\n'):
+        c.drawString(72, y, line)
+        y -= 15
+    c.save()
     pdf_output.seek(0)
     return pdf_output
-
 
 
 st.title("Welcome! Please copy/paste or Upload a Medical report")
