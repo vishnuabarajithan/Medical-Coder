@@ -69,6 +69,6 @@ pip install streamlit pillow PyPDF2 openai reportlab
 
 ## Support and Issues
 
-If you encounter any issues or have questions, feel free to [create an issue](https://github.com/your-username/medical-coding-software/issues) on the repository. We appreciate your feedback and contributions.
+If you encounter any issues or have questions, feel free to [create an issue](https://github.com/vishnuabarajithan/medical-coding-software/issues) on the repository. We appreciate your feedback and contributions.
 
 Thank you for using the Medical Coding Software!
